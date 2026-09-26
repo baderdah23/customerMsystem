@@ -6,7 +6,7 @@ export interface User {
   id?: string;
   username?: string;
   email?: string;
-  [key: string]: string;
+  [key: string]: string | undefined;
 }
 
 interface AuthContextType {
@@ -50,7 +50,11 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
     }
   };
 
-  const signup = async (username, email, password) => {
+  const signup = async (
+    username: string,
+    email: string,
+    password: string,
+  ): Promise<void> => {
     setError("");
     try {
       const res = await fetch(`${API_URL}/register`, {
@@ -76,7 +80,7 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
     }
   };
 
-  const login = async (email, password) => {
+  const login = async (email: string, password: string): Promise<void> => {
     setError("");
     try {
       const res = await fetch(`${API_URL}/login`, {
@@ -129,4 +133,12 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
   );
 };
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = (): AuthContextType => {
+  const context = useContext(AuthContext);
+
+  if (!context) {
+    throw new Error("useAuth must be used inside AuthProvider");
+  }
+
+  return context;
+};
