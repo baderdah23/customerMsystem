@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { UserSchema } from "./user.validation";
 import { addUser, findUser } from "./user.repository";
 import type { Request, Response } from "express";
