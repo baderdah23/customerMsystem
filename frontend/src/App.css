@@ -406,6 +406,7 @@ input {
   right: -240px;
   top: 20%;
   width: 580px;
+  z-index: -1;
 }
 .auth-quote {
   margin: auto 0;
