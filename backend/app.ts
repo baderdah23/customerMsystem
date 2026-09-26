@@ -32,6 +32,12 @@ app.use(cookieParser());
 app.use(customerRoutes);
 app.use(userRoutes);
 
-app.listen(process.env.port, () => {
-  console.log(`app is running on http://localhost:${process.env.port}`);
-});
+if (!process.env.VERCEL) {
+  const port = Number(process.env.PORT ?? process.env.port ?? 8000);
+
+  app.listen(port, () => {
+    console.log(`app is running on http://localhost:${port}`);
+  });
+}
+
+export default app;

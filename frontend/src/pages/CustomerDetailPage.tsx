@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import moment from "moment";
 import { toast } from "../context/ToastContext";
+import { API_URL } from "../config/api";
 
 const CustomerDetailPage = () => {
   type Customer = {
@@ -24,7 +25,7 @@ const CustomerDetailPage = () => {
   const fetchCustomerData = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:8000/customer/${params.id}`, {
+      const res = await fetch(`${API_URL}/customer/${params.id}`, {
         credentials: "include",
       });
       if (!res.ok) {

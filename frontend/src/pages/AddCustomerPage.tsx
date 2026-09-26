@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { IoChevronDown } from "react-icons/io5";
 import { toast } from "../context/ToastContext";
+import { API_URL } from "../config/api";
 
 const countries = [
   "Afghanistan  أفغانستان  ــــ ",
@@ -211,7 +212,7 @@ const AddCustomerPage = () => {
 
   const sendDate = async () => {
     try {
-      const res = await fetch("http://localhost:8000/customers", {
+      const res = await fetch(`${API_URL}/customers`, {
         method: "POST",
         credentials: "include",
         headers: {

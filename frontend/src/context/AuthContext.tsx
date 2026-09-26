@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { toast } from "./ToastContext";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config/api";
 
 export interface User {
   id?: string;
@@ -19,8 +20,6 @@ interface AuthContextType {
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-const API_URL = "http://localhost:8000";
 
 export const AuthProvider = (props: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);

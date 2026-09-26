@@ -5,6 +5,7 @@ import moment from "moment";
 import { toast } from "../context/ToastContext";
 import EditCustomerDialog from "../components/EditCustomerDialog";
 import type { CustomerData } from "../components/EditCustomerDialog";
+import { API_URL } from "../config/api";
 
 type Customer = {
   id: string;
@@ -28,7 +29,7 @@ const HomePage = (props: Props) => {
 
   const fetchCustomers = async (): Promise<void> => {
     try {
-      const res = await fetch("http://localhost:8000/customers", {
+      const res = await fetch(`${API_URL}/customers`, {
         credentials: "include",
       });
 
@@ -49,7 +50,7 @@ const HomePage = (props: Props) => {
 
   const handleDelete = async (id: string) => {
     try {
-      const res = await fetch(`http://localhost:8000/customer/${id}`, {
+      const res = await fetch(`${API_URL}/customer/${id}`, {
         credentials: "include",
         method: "DELETE",
       });
@@ -66,7 +67,7 @@ const HomePage = (props: Props) => {
 
   const handleUpdate = async (id: string, customerData: CustomerData) => {
     try {
-      const res = await fetch(`http://localhost:8000/customer/${id}`, {
+      const res = await fetch(`${API_URL}/customer/${id}`, {
         method: "PATCH",
         credentials: "include",
         headers: {
@@ -93,7 +94,7 @@ const HomePage = (props: Props) => {
         return;
       } else {
         try {
-          const endpoint = `http://localhost:8000/customers?search=${encodeURIComponent(props.searchValue.trim())}`;
+          const endpoint = `${API_URL}/customers?search=${encodeURIComponent(props.searchValue.trim())}`;
 
           const res = await fetch(endpoint, {
             signal: controller.signal,
